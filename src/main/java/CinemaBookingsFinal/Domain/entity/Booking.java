@@ -1,0 +1,50 @@
+package CinemaBookingsFinal.Domain.entity;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.time.LocalTime;
+import java.util.Set;
+
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "booking")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class Booking {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "booking_id")
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "screening_id")
+    @JsonManagedReference
+    private Screening screening;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
+
+    @Column(name = "booking_time")
+    private LocalTime bookingTime;
+
+    @Column(name = "is_booked")
+    private boolean isBooked;
+
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Set<SeatBooked> bookedSeats;
+}
