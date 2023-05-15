@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +24,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "booking_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "screening_id")
@@ -46,5 +47,5 @@ public class Booking {
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<SeatBooked> bookedSeats;
+    private List<Seat> bookedSeats;
 }

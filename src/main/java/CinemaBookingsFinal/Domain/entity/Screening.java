@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -23,7 +24,7 @@ public class Screening {
     @Id
     @GeneratedValue
     @Column(name = "screening_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
@@ -31,9 +32,9 @@ public class Screening {
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "auditorium_id")
+    @JoinColumn(name = "cinema_id")
     @JsonManagedReference
-    private Auditorium auditorium;
+    private Cinema cinema;
 
     @Column(name = "date")
     private LocalDate date;
@@ -52,9 +53,5 @@ public class Screening {
 
     @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<SeatBooked> bookedSeats;
-
-    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Set<Booking> bookings;
+    private List<Booking> bookings;
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "cinema")
@@ -20,12 +20,19 @@ public class Cinema {
     @Id
     @GeneratedValue
     @Column(name = "cinema_id")
-    private int id;
+    private Integer id;
+
+    @Column(name = "seat_count")
+    private Integer seatCount;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Auditorium> auditoriums;
+    private List<Seat> seats;
+
+    @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Screening> screenings;
 }

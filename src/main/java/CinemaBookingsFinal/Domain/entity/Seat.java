@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -20,20 +21,20 @@ import java.util.Set;
 @Builder
 public class Seat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "seat_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "seat_number")
     private Integer seatNumber;
 
     @ManyToOne
-    @JoinColumn(name = "auditorium_id")
+    @JoinColumn(name = "cinema_id")
     @JsonManagedReference
-    private Auditorium auditorium;
+    private Cinema cinema;
 
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<SeatBooked> bookedSeats;
+    private List<Booking> bookedSeats;
 }
 
