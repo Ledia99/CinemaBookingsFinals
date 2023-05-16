@@ -1,7 +1,8 @@
 package CinemaBookingsFinal.Service;
 
 import CinemaBookingsFinal.Domain.dto.Booking.BookingDTO;
-
+import CinemaBookingsFinal.Domain.dto.Booking.BookingUpdateDTO;
+import CinemaBookingsFinal.Domain.dto.Screening.ScreeningDTO;
 import CinemaBookingsFinal.Domain.entity.Booking;
 import CinemaBookingsFinal.Domain.entity.Screening;
 import org.springframework.security.oauth2.jwt.Jwt;

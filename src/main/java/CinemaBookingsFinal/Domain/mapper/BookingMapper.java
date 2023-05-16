@@ -2,6 +2,7 @@ package CinemaBookingsFinal.Domain.mapper;
 
 import CinemaBookingsFinal.Domain.dto.Booking.BookingDTO;
 import CinemaBookingsFinal.Domain.dto.Booking.BookingUpdateDTO;
+import CinemaBookingsFinal.Domain.dto.User.UserUpdateDTO;
 import CinemaBookingsFinal.Domain.entity.Booking;
 import CinemaBookingsFinal.Domain.entity.Screening;
 import CinemaBookingsFinal.Domain.entity.User;
@@ -39,6 +40,7 @@ public class BookingMapper {
                 .screening(s)
                 .build();
     }
+
 
     public static Booking createBooking(User u, Screening screening) {
         Booking b = new Booking();

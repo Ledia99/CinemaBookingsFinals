@@ -46,22 +46,7 @@ public class BookingServiceImpl implements BookingService {
         return null;
     }
 
-//    @Override
-//    public BookingDTO updateBooking(Integer id, BookingUpdateDTO req) {
-//        Booking toUpdate = bookingRepository.findById(id)
-//                .orElseThrow(()-> new ResourceNotFoundException(String
-//                        .format("Booking with id %s not found",id)));
-//        return BookingMapper.toDto(bookingRepository
-//                .save(BookingMapper.toEntityUpdate(toUpdate,req)));
-//    }
-//    @Override
-//    public BookingDTO pushBooking(BookingDTO b){
-//        Booking booking = BookingMapper.toEntity(b);
-//
-//        Booking savedBooking = bookingRepository.save(booking);
-//        BookingDTO savedBookingDTO = BookingMapper.toDto(savedBooking);
-//        return savedBookingDTO;
-//    }
+
     @Override
     public BookingDTO pushBooking(Jwt jwt, Screening s){
         User u = userService.getUserFromToken(jwt);
@@ -70,4 +55,21 @@ public class BookingServiceImpl implements BookingService {
         BookingDTO savedBookingDTO = BookingMapper.toDto(savedBooking);
         return savedBookingDTO;
     }
+
+//    @Override
+//    public BookingDTO updateBooking(BookingUpdateDTO updatedBooking, Integer id) {
+//        Booking toUpdate = bookingRepository.findById(id)
+//                .orElseThrow(()-> new ResourceNotFoundException(String
+//                        .format("Booking with id %s not found",id)));
+//        return BookingMapper.toDto(bookingRepository
+//                .save(BookingMapper.toEntityUpdate(toUpdate,updatedBooking)));
+//    }
+//@Override
+//public BookingUpdateDTO updateBooking(BookingUpdateDTO updatedBooking, Integer id) {
+//    Booking toUpdate = bookingRepository.findById(id)
+//            .orElseThrow(()-> new ResourceNotFoundException(String
+//                    .format("Booking with id %s not found",id)));
+//    return BookingMapper.toUpdateDto(bookingRepository
+//            .save(BookingMapper.toEntityUpdate(toUpdate,updatedBooking)));
+//}
 }

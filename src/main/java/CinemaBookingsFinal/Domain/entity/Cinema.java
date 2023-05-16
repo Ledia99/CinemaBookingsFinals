@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.util.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -28,6 +29,6 @@ public class Cinema {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Screening> screenings;
 }

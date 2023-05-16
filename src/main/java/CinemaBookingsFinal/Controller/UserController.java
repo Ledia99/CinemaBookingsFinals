@@ -23,15 +23,13 @@ public class UserController {
         return ResponseEntity.ok(dto);
     }
 
-    @RolesAllowed("ADMIN")
-    @PutMapping("/admin/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserUpdateDTO> updateUser(@PathVariable Integer id, @RequestBody UserUpdateDTO req){
         UserUpdateDTO u = userService.updateUser(id,req);
         return ResponseEntity.ok(u);
     }
 
-    @RolesAllowed("ADMIN")
-    @GetMapping("/admin/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<UserDTO> findUser(@PathVariable Integer id){
         User u = userService.getUserById(id);
         return ResponseEntity.ok(UserMapper.toDto(u));

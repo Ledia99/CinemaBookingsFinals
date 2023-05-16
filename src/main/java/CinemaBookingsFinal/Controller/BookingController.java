@@ -1,8 +1,11 @@
 package CinemaBookingsFinal.Controller;
 
 import CinemaBookingsFinal.Domain.dto.Booking.BookingDTO;
+import CinemaBookingsFinal.Domain.dto.Booking.BookingUpdateDTO;
+import CinemaBookingsFinal.Domain.dto.User.UserUpdateDTO;
 import CinemaBookingsFinal.Domain.entity.Booking;
 import CinemaBookingsFinal.Domain.entity.Screening;
+import CinemaBookingsFinal.Domain.mapper.BookingMapper;
 import CinemaBookingsFinal.Service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,6 @@ public class BookingController {
         Booking b = bookingService.getBookingById(id);
         return ResponseEntity.ok(b);
     }
-    @RolesAllowed("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteBookingById(@PathVariable Integer id) {
         return ResponseEntity.ok(bookingService.deleteBookingById(id));
@@ -32,4 +34,9 @@ public class BookingController {
     public ResponseEntity<BookingDTO> pushBooking(@AuthenticationPrincipal Jwt jwt, @RequestBody Screening s){
         return ResponseEntity.ok(bookingService.pushBooking(jwt,s));
     }
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<BookingDTO> updateBooking(@PathVariable Integer id, @RequestBody BookingUpdateDTO req){
+//        BookingUpdateDTO u = bookingService.updateBooking(req,id);
+//        return ResponseEntity.ok(BookingMapper.toUpdateDto(u));
+//    }
 }
