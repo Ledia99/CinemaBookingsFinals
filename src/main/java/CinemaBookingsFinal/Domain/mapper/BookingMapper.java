@@ -40,7 +40,7 @@ public class BookingMapper {
                 .build();
     }
 
-    public Booking createBooking(User u, Screening screening) {
+    public static Booking createBooking(User u, Screening screening) {
         Booking b = new Booking();
         b.setUser(u);
         b.setBookingTime(LocalTime.now());

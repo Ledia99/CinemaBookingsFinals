@@ -25,7 +25,7 @@ public class MovieController {
     }
 
     @RolesAllowed("ADMIN")
-    @DeleteMapping("/movie/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteMovieById(@PathVariable Integer id) {
         return ResponseEntity.ok(movieService.deleteMovie(id));
     }

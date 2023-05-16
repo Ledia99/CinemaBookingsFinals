@@ -10,6 +10,9 @@ import CinemaBookingsFinal.Repository.UserRepository;
 import CinemaBookingsFinal.Service.UserService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -56,5 +59,13 @@ public class UserServiceImpl implements UserService {
     public User getUserFromToken(Jwt jwt) {
         String sub = (String) jwt.getClaims().get("sub");
         return userRepository.findByEmail(sub).get();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+                .orElseThrow(
+                        ()->new UsernameNotFoundException(String.format("User with username %s not found", username))
+                );
     }
 }

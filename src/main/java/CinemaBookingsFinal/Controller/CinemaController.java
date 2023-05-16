@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RequiredArgsConstructor
 @RestControllerAdvice
-@RequestMapping("/movie")
+@RequestMapping("/cinema")
 public class CinemaController {
 private final CinemaService cinemaService;
 
-    @GetMapping("/cinema/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Cinema> findById(@PathVariable Integer id) {
         Cinema c = cinemaService.getCinemaById(id);
         return ResponseEntity.ok(c);
