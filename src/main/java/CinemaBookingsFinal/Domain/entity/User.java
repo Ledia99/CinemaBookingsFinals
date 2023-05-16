@@ -34,8 +34,6 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    @ToString.Exclude
-    @OneToOne(mappedBy = "user")
     @CreatedDate
     private LocalDateTime created_at;
     @Override

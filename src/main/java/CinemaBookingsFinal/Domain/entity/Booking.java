@@ -28,12 +28,10 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "screening_id")
-    @JsonManagedReference
     private Screening screening;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private User user;
 
     @Column(name = "booking_time")
@@ -45,7 +43,5 @@ public class Booking {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Seat> bookedSeats;
+
 }

@@ -29,10 +29,5 @@ public class Cinema {
     private String name;
 
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Seat> seats;
-
-    @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Screening> screenings;
 }
